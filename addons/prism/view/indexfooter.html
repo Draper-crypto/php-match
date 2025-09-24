@@ -1,0 +1,13 @@
+{if $config['is_line']}
+    {if $config['line_enter']}
+    <script>
+        $('pre,code').addClass('line-numbers').css("white-space", "pre-wrap");
+    </script>
+    {else /}
+    <script>
+        $('pre,code').addClass('line-numbers');
+    </script>
+    {/if}
+{/if}
+
+<script src="{$site['cdn']}/static/addons/prism/jscss/{$config['theme']}.js"></script>

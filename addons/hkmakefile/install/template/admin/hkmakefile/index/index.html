@@ -1,0 +1,405 @@
+<style>
+    .form-export .card-body .row-form-label {text-align: right;padding-left: 15px;padding-right: 15px;font-weight: normal;}
+    .config-row label {text-align: right;}
+</style>
+<div class="col-12 col-sm-12">
+    <div class="card card-tabs">
+        <div class="card-header">
+            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="pill" href="#template">模板</a>
+                </li>
+                {if false}
+                <li class="nav-item">
+                    <a class="nav-link " data-toggle="pill" href="#addons">插件</a>
+                </li>
+                {/if}
+            </ul>
+        </div>
+        <div class="card-body config-row">
+            <div class="tab-content" id="custom-tabs-three-tabContent">
+                <div class="tab-pane fade active show" id="template" role="tabpanel">
+                    <form role="form" action="" class="frm-operate form-template" method="post">
+                        <div class="card shadow-none">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 row-form-label"><span class="text-danger">*</span> 模板类型: </label>
+                                    <div class="col-sm-8">
+                                        {:build_radios('row[type]',['responsive'=>'响应式','pcmobile'=>'非响应式（PC和手机分离）'],'responsive')}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="frm-title" class="col-sm-2 row-form-label"><span class="text-danger">*</span> 模板标题: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="frm-title" name="row[title]" data-rule="required" placeholder="模板标题">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="frm-description" class="col-sm-2 row-form-label"><span class="text-danger">*</span> 模板简介: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="frm-description" name="row[description]" data-rule="required" placeholder="模板简介">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="frm-name" class="col-sm-2 row-form-label"><span class="text-danger">*</span> 应用标识: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="frm-name" name="row[name]" data-rule="required" placeholder="应用标识：只能输入字母、数字、下划线，自动检测是否被注册。">
+                                        <button class="btn btn-sm btn-info btn-random mt-1" type="button">随机生成</button>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="frm-author" class="col-sm-2 row-form-label"><span class="text-danger">*</span> 作者: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="frm-author" data-rule="required" name="row[author]" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="frm-version" class="col-sm-2 row-form-label"><span class="text-danger">*</span> 版本号: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="frm-version" data-rule="required" name="row[version]" value="1.0.0" placeholder="例如：1.0.0">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="frm-version" class="col-sm-2 row-form-label"></label>
+                                    <div class="col-sm-8">
+                                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">更多配置</a>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 row-form-label">提醒文件: </label>
+                                                    <div class="col-sm-8">
+                                                        <div class="radio-group">
+                                                            <div class="radio-item">
+                                                                <input id="row[file_path]-error" name="row[file_path][0]" type="checkbox" checked value="error">
+                                                                <label for="row[file_path]-error">错误页</label>
+                                                            </div>
+                                                            <div class="radio-item">
+                                                                <input id="row[file_path]-success" name="row[file_path][1]" type="checkbox" checked value="success">
+                                                                <label for="row[file_path]-success">成功页</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 row-form-label">其他文件: </label>
+                                                    <div class="col-sm-8">
+                                                        <div class="radio-group">
+                                                            <div class="radio-item">
+                                                                <input id="row[other_path]-config" name="row[other_path][0]" type="checkbox" checked value="config">
+                                                                <label for="row[other_path]-config">配置文件</label>
+                                                            </div>
+                                                            <div class="radio-item">
+                                                                <input id="row[other_path]-zhcn" name="row[other_path][1]" type="checkbox" checked value="zh-cn">
+                                                                <label for="row[other_path]-zhcn">语言包（中文）</label>
+                                                            </div>
+                                                            <div class="radio-item">
+                                                                <input id="row[other_path]-en" name="row[other_path][2]" type="checkbox" checked value="en">
+                                                                <label for="row[other_path]-en">语言包（英文）</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-around">
+                                    <div class="col-sm-8">
+                                        <button type="button" class="btn btn-primary btn-sub-template disabled">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {if false}
+                <div class="tab-pane fade " id="addons" role="tabpanel">
+                    <form role="form" action="" class="frm-operate form-addons" method="post">
+                        <div class="card shadow-none">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label for="frm-a-title" class="col-sm-2 row-form-label"><span class="text-danger">*</span> 插件标题: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="frm-a-title" name="row[title]" data-rule="required" placeholder="插件标题">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="frm-a-description" class="col-sm-2 row-form-label"><span class="text-danger">*</span> 插件简介: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="frm-a-description" name="row[description]" data-rule="required" placeholder="插件简介">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="frm-a-name" class="col-sm-2 row-form-label"><span class="text-danger">*</span> 应用标识: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="frm-a-name" name="row[name]" data-rule="required" placeholder="应用标识：只能输入小写字母，自动检测是否被注册。">
+                                        <button class="btn btn-sm btn-info btn-random mt-1" type="button">随机生成</button>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="frm-a-author" class="col-sm-2 row-form-label"><span class="text-danger">*</span> 作者: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="frm-a-author" data-rule="required" name="row[author]" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="frm-a-version" class="col-sm-2 row-form-label"><span class="text-danger">*</span> 版本号: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="frm-a-version" data-rule="required" name="row[version]" value="1.0.0" placeholder="1.0.0">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="frm-version" class="col-sm-2 row-form-label"></label>
+                                    <div class="col-sm-8">
+                                        <a data-toggle="collapse" href="#a-collapseExample" role="button" aria-expanded="false" aria-controls="a-collapseExample">更多配置</a>
+                                        <div class="collapse border rounded" id="a-collapseExample">
+                                            <div class="card card-body">
+                                                <div class="form-group row">
+                                                    <label for="frm-a-database" class="col-sm-2 row-form-label">数据库: </label>
+                                                    <div class="col-sm-8">
+                                                        <div class="radio-group">
+                                                            <input type="text" class="form-control" id="frm-a-database" name="row[database]" data-rule="" autocomplete="off" placeholder="例如：table2,table1,table3">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1 form-tips">
+                                                        <span style="color: #9ca3af" data-toggle="tooltip" data-placement="top" data-title="数据库，不需要写表前缀，用于安装时检测数据库表是否存在，如果已存在则提示用户。" data-original-title="" title=""><i class="far fa-question-circle"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="frm-a-dir" class="col-sm-2 row-form-label">目录权限检测: </label>
+                                                    <div class="col-sm-8">
+                                                        <div class="radio-group">
+                                                            <input type="text" class="form-control" id="frm-a-dir" name="row[dir]" data-rule="" autocomplete="off" placeholder="例如：app/admin/,app/index/">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1 form-tips">
+                                                        <span style="color: #9ca3af" data-toggle="tooltip" data-placement="top" data-title="目录，用于目录权限检测，如果检测不通过，提示用户需要有写入的权限。" data-original-title="" title=""><i class="far fa-question-circle"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 row-form-label">基础文件: </label>
+                                                    <div class="col-sm-8">
+                                                        <div class="radio-group">
+                                                            <div class="radio-item">
+                                                                <input id="row[base_path]-config" name="row[base_path][0]" type="checkbox" checked value="config.php">
+                                                                <label for="row[base_path]-config">配置文件</label>
+                                                            </div>
+                                                            <div class="radio-item">
+                                                                <input id="row[base_path]-common" name="row[base_path][1]" type="checkbox" value="common.php">
+                                                                <label for="row[base_path]-common">函数库</label>
+                                                            </div>
+                                                            <div class="radio-item">
+                                                                <input id="row[base_path]-route" name="row[base_path][2]" type="checkbox" value="route.php">
+                                                                <label for="row[base_path]-route">路由</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 row-form-label">插件文件: </label>
+                                                    <div class="col-sm-8">
+                                                        <div class="radio-group">
+                                                            <div class="radio-item">
+                                                                <input id="row[addons_path]-controller" name="row[addons_path][0]" type="checkbox" value="controller">
+                                                                <label for="row[addons_path]-controller">控制器</label>
+                                                            </div>
+                                                            <div class="radio-item">
+                                                                <input id="row[addons_path]-model" name="row[addons_path][1]" type="checkbox" value="model">
+                                                                <label for="row[addons_path]-model">模型</label>
+                                                            </div>
+                                                            <div class="radio-item">
+                                                                <input id="row[addons_path]-view" name="row[addons_path][2]" type="checkbox" value="view">
+                                                                <label for="row[addons_path]-view">视图</label>
+                                                            </div>
+                                                            <div class="radio-item">
+                                                                <input id="row[addons_path]-middleware" name="row[addons_path][3]" type="checkbox" value="middleware">
+                                                                <label for="row[addons_path]-middleware">中间件</label>
+                                                            </div>
+                                                            <div class="radio-item">
+                                                                <input id="row[addons_path]-validate" name="row[addons_path][4]" type="checkbox" value="validate">
+                                                                <label for="row[addons_path]-validate">验证器</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 row-form-label">其他文件: </label>
+                                                    <div class="col-sm-8">
+                                                        <div class="radio-group">
+                                                            <div class="radio-item">
+                                                                <input id="row[other_path]-taglib" name="row[other_path][0]" type="checkbox" value="taglib">
+                                                                <label for="row[other_path]-taglib">HkCms标签库</label>
+                                                            </div>
+                                                            <div class="radio-item">
+                                                                <input id="row[other_path]-zhcn" name="row[other_path][1]" type="checkbox" value="lang/zh-cn.json">
+                                                                <label for="row[other_path]-zhcn">语言包（中文）</label>
+                                                            </div>
+                                                            <div class="radio-item">
+                                                                <input id="row[other_path]-en" name="row[other_path][2]" type="checkbox" value="lang/en.json">
+                                                                <label for="row[other_path]-en">语言包（英文）</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-around">
+                                    <div class="col-sm-8">
+                                        <button type="button" class="btn btn-primary btn-sub-addons disabled">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
+
+{block:script}
+<script>
+    require(['jquery','adminlte','layer','jquery-fileupload', 'form'], function ($, undefined, undefined, fileupload, Form) {
+        $(function () {
+            function randomString(len,type = 'template') {
+                len = len || 10;
+                var $chars = 'abcdefghijklmnopqrstuvwxyz';
+                var maxPos = $chars.length;
+                var name = '';
+                for (i = 0; i < len; i++) {
+                    name += $chars.charAt(Math.floor(Math.random() * maxPos));
+                }
+                return name;
+            }
+
+            /** 模板JS **/
+            $('.form-template .btn-random').on('click',function () {
+                var index = layer.load(1);
+                var name = randomString(10,'template');
+                $.post("{:url('/hkmakefile.index/detect')}",{name:name,type:'template'},function (data) {
+                    if (data['code'] == 1) {
+                        $(".form-template input[name='row[name]']").val(name);
+                        $(".form-template .btn-sub-template").removeClass('disabled');
+                    } else {
+                        $(".form-template input[name='row[name]']").val(data['name']);
+                        $(".form-template .btn-sub-template").removeClass('disabled');
+                    }
+                    layer.close(index);
+                })
+            })
+            $('.form-template input[name="row[name]"]').on('blur',function () {
+                if ($(this).val() != "") {
+                    var index = layer.load(1);
+                    $.post("{:url('/hkmakefile.index/detect')}",{name:$(this).val(),type:'template'},function (data) {
+                        if (data['code'] == 1) {
+                            $(".form-template .btn-sub-template").removeClass('disabled');
+                        } else {
+                            layer.msg(data['msg']);
+                        }
+                        layer.close(index);
+                    })
+                } else {
+                    if (!$(".form-template .btn-sub-template").hasClass('disabled')) {
+                        $(".form-template .btn-sub-template").addClass('disabled');
+                    }
+                }
+            })
+            $(".form-template .btn-sub-template").on('click',function () {
+                if ($(this).hasClass('disabled')) {
+                    return false;
+                }
+                var results = $('.form-template').serializeArray(),arr = {};
+                $.each(results,function(index,item){
+                    if(item.value && $.trim(item.value)!=""){
+                        if(!arr[item.name]){
+                            arr[item.name]=item.value;
+                        } else {
+                            arr[item.name]=arr[item.name]+','+item.value;
+                        }
+                    } else {
+                        arr[item.name]="";
+                    }
+                });
+                if (arr['row[author]'] == "" || arr['row[description]'] == "" || arr['row[name]'] == "" || arr['row[title]'] == "" || arr['row[version]'] == "") {
+                    layer.msg('请填写打 * 号的字段。');
+                    return false;
+                }
+                $.post("{:url('/hkmakefile.index/addtemplate')}",arr,function (data) {
+                    layer.msg(data['msg'],{time:3000},function () {
+                        if (data['code'] == 1) {
+                            window.location.reload();
+                        }
+                    })
+                })
+            })
+
+            /** 插件JS **/
+            $('.form-addons .btn-random').on('click',function () {
+                var index = layer.load(1);
+                var name = randomString(10,'addons');
+                $.post("{:url('/hkmakefile.index/detect')}",{name:name,type:'addons'},function (data) {
+                    if (data['code'] == 1) {
+                        $(".form-addons input[name='row[name]']").val(name);
+                        $(".form-addons .btn-sub-addons").removeClass('disabled');
+                    } else {
+                        $(".form-addons input[name='row[name]']").val(data['name']);
+                        $(".form-addons .btn-sub-addons").removeClass('disabled');
+                    }
+                    layer.close(index);
+                })
+            })
+            $('.form-addons input[name="row[name]"]').on('blur',function () {
+                if ($(this).val() != "") {
+                    var index = layer.load(1);
+                    $.post("{:url('/hkmakefile.index/detect')}",{name:$(this).val(),type:'addons'},function (data) {
+                        if (data['code'] == 1) {
+                            $(".form-addons .btn-sub-addons").removeClass('disabled');
+                        } else {
+                            layer.msg(data['msg']);
+                        }
+                        layer.close(index);
+                    })
+                } else {
+                    if (!$(".form-addons .btn-sub-addons").hasClass('disabled')) {
+                        $(".form-addons .btn-sub-addons").addClass('disabled');
+                    }
+                }
+            })
+            $(".form-addons .btn-sub-addons").on('click',function () {
+                if ($(this).hasClass('disabled')) {
+                    return false;
+                }
+                var results = $('.form-addons').serializeArray(),arr = {};
+                $.each(results,function(index,item){
+                    if(item.value && $.trim(item.value)!=""){
+                        if(!arr[item.name]){
+                            arr[item.name]=item.value;
+                        } else {
+                            arr[item.name]=arr[item.name]+','+item.value;
+                        }
+                    } else {
+                        arr[item.name]="";
+                    }
+                });
+                if (arr['row[author]'] == "" || arr['row[description]'] == "" || arr['row[name]'] == "" || arr['row[title]'] == "" || arr['row[version]'] == "") {
+                    layer.msg('请填写打 * 号的字段。');
+                    return false;
+                }
+                $.post("{:url('/hkmakefile.index/addaddons')}",arr,function (data) {
+                    layer.msg(data['msg'],{time:3000},function () {
+                        if (data['code'] == 1) {
+                            window.location.reload();
+                        }
+                    })
+                })
+            })
+
+            Form.api.init({frmOperate:".form-import"});
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    });
+</script>
+{/block:script}

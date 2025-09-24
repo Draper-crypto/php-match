@@ -1,0 +1,29 @@
+<?php
+
+/**
+  * 在插件根目录下新建route.php文件，路径为：addons/插件名称/route.php
+  * 示例如下：定义好后浏览器访问：http://xxxx.com/ceshi ，就能去到demo插件下的Index控制器下的index操作方法。
+  */
+return [
+    // url地址=>插件名称/控制器/操作方法
+    'ceshi'=>'demo/index/index'
+];
+
+/**
+  * 域名形式
+  * 下面绑定了两个域名，那么访问地址是：http://demo.xxxx.com/ceshi，以及http://local.xxx.com/ceshi
+  */
+/*return [
+    [
+        'domain' => 'demo',
+        'rule' => [
+            'ceshi'=>'demo/index/index'
+        ]
+    ],
+    [
+        'domain' => 'local',
+        'rule' => [
+            'ceshi'=>'demo/index/index'
+        ]
+    ]
+];*/

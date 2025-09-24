@@ -1,0 +1,121 @@
+<?php
+return [
+    // 名称，保持唯一，获取时：$tmp['value1'] 即可获取value值。
+    'value1' => [
+        'title' => '标题', // 标题
+        'type' => 'text',  // 组件类型
+        'tips' => '提示',  // 提示信息
+        'rules' => 'required;length(3~16)',  // 验证规则，可参考字段类型与组件下的验证规则，多个规则;隔开
+        'error_tips'=>'值必须',  // 错误的提示信息
+        'value' => '' // 默认值
+    ],
+    'value2' => [
+        'title' => '描述',
+        'type' => 'textarea',
+        'tips' => '',
+        'rules' => '',
+        'error_tips'=>'',
+        'value' => ''
+    ],
+    'radio' => [
+        'title' => '是否显示',
+        'type' => 'radio',
+        'tips' => '',
+        'rules' => '',
+        'error_tips'=>'',
+        'options' => [  // 选项
+            '1' => '显示',
+            '0' => '不显示'
+        ],
+        'value' => '1'
+    ],
+    'checkbox' => [
+        'title' => '多项选择',
+        'type' => 'checkbox',
+        'tips' => '',
+        'rules' => '',
+        'error_tips'=>'',
+        'options' => [
+            // key=>标题
+            '1' => '显示1',
+            '2' => '显示3',
+            '0' => '不显示'
+        ],
+        'value' => '1,2'  // 多选时英文逗号分隔，对应选项key值
+    ],
+    'select' => [
+        'title' => '下拉选择',
+        'type' => 'select',
+        'tips' => '我是提示',
+        'rules' => '',
+        'error_tips'=>'',
+        'options' => [
+            '1' => '测试1',
+            '2' => '测试2',
+            '3' => '测试3'
+        ],
+        'value' => '2'
+    ],
+    'array1' => [
+        'title' => '测试array组件',
+        'type' => 'array',
+        'tips' => '',
+        'rules' => '',
+        'error_tips'=>'',
+        'data_list'=>[// 键值名称
+            'key'=>'标题',
+            'value'=>'值'
+        ],
+        'value' => [
+            '标题1'=>'2'// 默认值
+        ]
+    ],
+    'value3' => [
+        'title' => '动态下拉url类型',
+        'type' => 'selectpage', // 动态下拉
+        'tips' => '',
+        'rules' => '',
+        'error_tips'=>'',
+        'data_list'=>[
+            'type'=>'url',//链接地址类型
+            'url'=>'/cms.flags/index',//链接地址类型
+            'show-field'=>'title', // 显示字段
+            'key-field'=>'id',// 存储字段
+            'search-field'=>'title',// 搜索字段
+            'and-or'=>'',// 值为and、或者or，search-field为多个时，值为and时表示同时成立反之其中一个成立即可
+            'order-by'=>'',// 排序：id desc,view asc
+            'param'=>[
+                'status'=>'normal' // 指定额外的条件
+            ],
+            'multiple'=>0,// 多选，1=开启，0=关闭
+            'pagination'=>0,// 分页，1=开启，0=关闭
+            'select-only'=>1,// 只读，1开启，0关闭
+            'enable-lang'=>1,// 启用多语言区分，1开启，0关闭
+        ],
+        'value' => ''
+    ],
+    'value4' => [
+        'title' => '动态下拉table类型',
+        'type' => 'selectpage',
+        'tips' => '',
+        'rules' => '',
+        'error_tips'=>'',
+        'data_list'=>[
+            'type'=>'table',// 数据源来自数据库表
+            'table'=>'flags',// flags表，不用写表前缀
+            'show-field'=>'title',
+            'key-field'=>'id',
+            'search-field'=>'title,name',
+            'and-or'=>'or',
+            'order-by'=>'id desc',
+            'param'=>[
+                'status'=>'normal'
+            ],
+            'multiple'=>1,// 多选，1=开启，0=关闭
+            'pagination'=>0,// 分页，1=开启，0=关闭
+            'select-only'=>0,// 只读，1开启，0关闭
+            'enable-lang'=>1,// 启用多语言区分，1开启，0关闭
+        ],
+        'value' => ''
+    ],
+];

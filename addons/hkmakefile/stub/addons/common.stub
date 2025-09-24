@@ -1,0 +1,10 @@
+<?php
+
+//demo函数示例，之后在插件控制器等插件内部即可调用demo函数。
+
+if (!function_exists('demo')) {
+    function demo()
+    {
+        echo 1;
+    }
+}

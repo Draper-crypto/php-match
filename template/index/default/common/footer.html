@@ -1,0 +1,95 @@
+<footer id="footer" class="footer footer-light">
+    <div class="footer-main">
+        <div class="container-fluid"> <!-- 修改为container-fluid实现全宽 -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6 footer-widget footer-about">
+                    <img loading="lazy" class="footer-logo" src="{$site.logo}" alt="{$site.title}">
+                    <h4 class="footer-brand-title">{$site.title}</h4>
+                    <p>{$site.description}</p>
+                    <!-- 顶部社交图标移至底部版权区，仅美化不改数据来源 -->
+                </div>
+
+                {// 产品展示栏目}
+                <div class="col-lg-3 col-md-6 footer-widget">
+                    <h3 class="widget-title">{hkcms:channel name="21"}{$item.title}{/hkcms:channel}</h3>
+                    <ul class="list-arrow">
+                        {hkcms:channel name="21" type="son"}
+                        <li><a href="{$item.url}">{$item.title}</a></li>
+                        {/hkcms:channel}
+                    </ul>
+                </div>
+                <!-- 将“快捷入口”拆分为两列，分别取 7 与 34 的栏目，标题使用对应栏目名 -->
+                <div class="col-lg-3 col-md-6 footer-widget">
+                    <h3 class="widget-title">{hkcms:channel name="7"}{$item.title}{/hkcms:channel}</h3>
+                    <ul class="list-arrow">
+                        {hkcms:channel name="7"}
+                        <li><a href="{$item.url}" target="_blank">{$item.title}</a></li>
+                        {/hkcms:channel}
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-widget">
+                    <h3 class="widget-title">{hkcms:channel name="34"}{$item.title}{/hkcms:channel}</h3>
+                    <ul class="list-arrow">
+                        {hkcms:channel name="34"}
+                        <li><a href="{$item.url}" target="_blank">{$item.title}</a></li>
+                        {/hkcms:channel}
+                    </ul>
+                </div>
+            </div><!-- Row end -->
+        </div><!-- Container end -->
+    </div><!-- Footer main end -->
+
+    <div class="copyright">
+        <div class="container-fluid"> <!-- 修改为container-fluid实现全宽 -->
+            <div class="row align-items-center">
+                <!-- 友情链接移至版权信息上方 -->
+                <div class="col-md-12">
+                    <div class="footer-menu text-center" style="margin-bottom:12px;">
+                        <ul class="list-unstyled mb-0">
+                            {// 调用文字链接}
+                            {hkcms:adv name="link" key="kk"}
+                            {// kk是从1开始，每次循环+1，$kk==1表示执行第一次时，获取友情链接备注（在站点模块列表页叫标题），$item.recommend是站点模块信息。}
+                            {if $kk==1}
+                            <li>{$item.recommend.remark}:</li>
+                            {/if}
+                            <li><a href="{$item.url}" {$item.target}>{$item.title}</a></li>
+                            {/hkcms:adv}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="copyright-info text-center"><span>Copyright &copy; <script>document.write(new Date().getFullYear())</script> {$site.title} All Rights Reserved </span></div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="copyright-info text-center">
+                        <span><a href="http://beian.miit.gov.cn" target="_blank">{$site.icp}</a></span>
+                    </div>
+                </div>
+
+                <!-- 底部社交图标：已移除QQ、微信、电话、邮箱按钮 -->
+                <!-- 社交按钮区域已完全移除 -->
+            </div><!-- Row end -->
+
+            <div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top position-fixed">
+                <button class="btn btn-primary" title="Back to Top">
+                    <i class="ti ti-chevron-up"></i>
+                </button>
+            </div>
+
+        </div><!-- Container end -->
+    </div><!-- Copyright end -->
+</footer><!-- Footer end -->
+
+
+<!--libs库目录-->
+<script src="__libs__/jquery/jquery.min.js"></script>
+<script src="__libs__/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="__libs__/layer/layer.js"></script>
+<!--轮播图-->
+<script src="__static__/js/swiper.min.js"></script>
+<script src="__static__/js/main.js?v={$site.dev=='enable'?time():$site.version}"></script>
+
+<!--事件底部定义，部分插件所需-->
+{:hook("indexFooter")}

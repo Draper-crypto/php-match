@@ -1,0 +1,101 @@
+{block:style}
+<style>
+    .col-form-label {
+        text-align: right;
+    }
+</style>
+{/block:style}
+<form class="frm-operate">
+    <input type="hidden" name="module" value="{$module}">
+    <div class="card card-primary card-tabs">
+        <div class="card-body">
+            <div class="tab-content" id="custom-tabs-three-tabContent">
+                <div class="form-group row">
+                    <label for="frm-tags_model" class="col-sm-2 col-12 col-form-label">{$sdata['tags_model']['title']}：</label>
+                    <input class="form-control" id="frm-tags_model" placeholder="{$sdata['tags_model']['tips']}" type="hidden" value="{$sdata['tags_model']['value']}">
+                    <div class="col-sm-8 col-12 list-model">
+                        <div class="radio-group"></div>
+                    </div>
+                    <div class="col-sm-2 form-tips"><span class="form-tips-span" data-tips="{$sdata['tags_model']['tips']}"><i class="far fa-question-circle"></i></span></div>
+                </div>
+                <div class="form-group row">
+                    <label for="frm-tags" class="col-sm-2 col-12 col-form-label">{$sdata['tags']['title']}：</label>
+                    <div class="col-sm-8 col-12">
+                        <input class="form-control" id="frm-tags" placeholder="{$sdata['tags']['tips']}" data-msg="{$sdata['tags']['error_tips']}" name="row[tags]" type="text" value="{$sdata['tags']['value']}">
+                    </div>
+                    <div class="col-sm-2 form-tips"><span class="form-tips-span" data-tips="{$sdata['tags']['tips']}"><i class="far fa-question-circle"></i></span></div>
+                </div>
+                <div class="form-group row">
+                    <label for="frm-tags_list" class="col-sm-2 col-12 col-form-label">{$sdata['tags_list']['title']}：</label>
+                    <div class="col-sm-8 col-12">
+                        <input class="form-control" id="frm-tags_list" placeholder="{$sdata['tags_list']['title']}" data-msg="{$sdata['tags']['error_tips']}" name="row[tags_list]" type="text" value="{$sdata['tags_list']['value']}">        </div>
+                    <div class="col-sm-2 form-tips"><span class="form-tips-span" data-tips="{$sdata['tags_list']['title']}"><i class="far fa-question-circle"></i></span></div>
+                </div>
+                <div class="form-group row">
+                    <label for="frm-seo_title" class="col-sm-2 col-12 col-form-label">{$sdata['seo_title']['title']}：</label>
+                    <div class="col-sm-8 col-12">
+                        <input class="form-control" id="frm-seo_title" placeholder="{$sdata['seo_title']['tips']}" name="row[seo_title]" type="text" value="{$sdata['seo_title']['value']}">
+                    </div>
+                    <div class="col-sm-2 form-tips"><span class="form-tips-span" data-tips="{$sdata['seo_title']['tips']}"><i class="far fa-question-circle"></i></span></div>
+                </div>
+                <div class="form-group row">
+                    <label for="frm-seo_keyword" class="col-sm-2 col-12 col-form-label">{$sdata['seo_keyword']['title']}：</label>
+                    <div class="col-sm-8 col-12">
+                        <input class="form-control" id="frm-seo_keyword" placeholder="{$sdata['seo_keyword']['tips']}" name="row[seo_keyword]" type="text" value="{$sdata['seo_keyword']['value']}">
+                    </div>
+                    <div class="col-sm-2 form-tips"><span class="form-tips-span" data-tips="{$sdata['seo_keyword']['tips']}"><i class="far fa-question-circle"></i></span></div>
+                </div>
+                <div class="form-group row">
+                    <label for="frm-seo_desc" class="col-sm-2 col-12 col-form-label">{$sdata['seo_desc']['title']}：</label>
+                    <div class="col-sm-8 col-12">
+                        <input class="form-control" id="frm-seo_desc" placeholder="{$sdata['seo_desc']['tips']}" name="row[seo_desc]" type="text" value="{$sdata['seo_desc']['value']}">        </div>
+                    <div class="col-sm-2 form-tips"><span class="form-tips-span" data-tips="{$sdata['seo_desc']['tips']}"><i class="far fa-question-circle"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row justify-content-around">
+                <div class="col-sm-8">
+                    <button type="submit" class="btn btn-primary btn-submit">{:lang('Submit')}</button>
+                    <button type="reset" class="btn btn-default">{:lang('Reset')}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{block:script}
+<script>
+    require(['admin','form'], function (admin,Form) {
+
+        Util.ajax({ url:'{:url("/tags/getModelList")}' }, '', function (data) {
+            if (data.length) {
+                var html = '';
+                var arr = $('#frm-tags_model').val();
+                arr = arr.split(',');
+                $.each(data, function (idx, vo) {
+                    if ($.inArray(vo.id.toString(), arr)!=-1) {
+                        html += '<div class="radio-item"><input class="model-input" id="model-'+vo.id+'" type="checkbox" checked value="'+vo.id+'" >\n' +
+                            '<label for="model-'+vo.id+'">'+vo.name+'</label></div>';
+                    } else {
+                        html += '<div class="radio-item"><input class="model-input" id="model-'+vo.id+'" type="checkbox" value="'+vo.id+'" >\n' +
+                            '<label for="model-'+vo.id+'">'+vo.name+'</label></div>';
+                    }
+                })
+                $('.list-model').find('.radio-group').html(html);
+            }
+        })
+
+        Form.api.init({before: function (e) {
+            var values = [];
+            $('.radio-group').find('.model-input').each(function (idx, vo) {
+                if ($(this).prop('checked')) {
+                    values.push($(this).val());
+                }
+            });
+                e.push({name:'row[tags_model]', value:values.join(',')});
+            return e;
+        }});
+    })
+</script>
+{/block:script}

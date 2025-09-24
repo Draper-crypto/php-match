@@ -1,0 +1,15 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{:token()}">
+
+<!-- Font Awesome 5.13.0 字体图标库 -->
+<link rel="stylesheet" href="__libs__/fontawesome-free/css/all.min.css">
+<!-- Bootstrap v4.6.0 依赖自带的CSS -->
+<link rel="stylesheet" href="__libs__/bootstrap/css/bootstrap.min.css">
+<!-- 个人中心样式 -->
+<link rel="stylesheet" href="/static/addons/user/css/style.css?v={:env('APP_DEBUG')?time():$site.version}">
+
+<script type="text/javascript">
+    window.Config = {:json_encode($site)};
+    window.Lang = [];
+</script>

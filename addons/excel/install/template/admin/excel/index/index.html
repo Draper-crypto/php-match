@@ -1,0 +1,299 @@
+<style>
+    .alltablefield {display: none;}
+</style>
+
+<div class="col-12 col-sm-12">
+    <div class="card card-tabs">
+        <div class="card-header">
+            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="pill" href="#export" data-type="template">{:lang("Document export")}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#import" data-type="addon">{:lang("Document import")}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#exportlist" data-type="addon">{:lang("Export List")}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body config-row">
+            <div class="tab-content" id="custom-tabs-three-tabContent">
+                <div class="tab-pane fade active show" id="export" role="tabpanel">
+                    <form role="form" action="" class="form-export" method="post">
+                        <input type="hidden" name="row[model_id]" value="">
+                        <div class="form-group row">
+                            <label for="frm-category_id" class="col-sm-2 row-form-label">{:lang("Designated column")}: </label>
+                            <div class="col-sm-8">
+                                <select id="frm-category_id" name="row[category_id]" class="form-control">
+                                    <option value="">---{:lang('SelectCategory')}---</option>
+                                    {volist name="category_list" id="vo"}
+                                    {neq name="vo.model_id" value="0"}
+                                    <option value="{$vo.id}">{$vo.title|raw}</option>
+                                    {/neq}
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="frm-name" class="col-sm-2 row-form-label">{:lang("Document Name")}: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="frm-name" name="row[name]" placeholder="{:lang('Document Name')}">
+                            </div>
+                        </div>
+                        <div class="alltablefield">
+                            <div class="form-group row">
+                                <label class="col-sm-2"></label>
+                                <div class="col-sm-8">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="3" class="text-center">{:lang('Please select exported data')}</th>
+                                            </tr>
+                                            <tr>
+                                                <th width="45px"><input type="checkbox" class="all-field"></th>
+                                                <th>{:lang('Field')}</th>
+                                                <th width="80%">{:lang('Remark')}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tablefield"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-around">
+                            <div class="col-sm-8">
+                                <button type="button" class="btn btn-primary btn-sub-export">{:lang('Submit')}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="import" role="tabpanel">
+                    <form role="form" action="" class="frm-operate form-import" method="post">
+                        <div class="row justify-content-around">
+                            <div class="col-md-10">
+                                <div class="alert alert-default-warning alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <p class="m-0"><i class="icon fas fa-exclamation-triangle"></i> 提示</p>
+                                    <p class="m-0">1. 先选栏目，再点击"导入模板"按钮导出模板。</p>
+                                    <p class="m-0">2. 根据导入模板，录入，上传导入模板点击提交。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="frm-import-category_id" class="col-sm-2 row-form-label">{:lang("Designated column")}: </label>
+                            <div class="col-sm-8">
+                                <div class="d-flex">
+                                    <select id="frm-import-category_id" name="row[category_id]" class="form-control">
+                                        <option value="">---{:lang('SelectCategory')}---</option>
+                                        {volist name="category_list" id="vo"}
+                                        {neq name="vo.model_id" value="0"}
+                                        <option value="{$vo.id}">{$vo.title|raw}</option>
+                                        {/neq}
+                                        {/volist}
+                                    </select>
+                                    <input type="button" class="btn btn-default ml-1 btn-import-dome" value="{:lang('Import Dome')}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="frm-image" class="col-sm-2 row-form-label">{:lang("File")}</label>
+                            <div class="col-sm-8 fileGroup">
+                                <div class="file-btn">
+                                    <input type="text" class="form-control txt-files" id="frm-image" name="row[file]" readonly placeholder="">
+                                    <input type="button"
+                                           class="btn btn-default ml-1 btn-imgUpload"
+                                           data-mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                           data-multiple="false"
+                                           data-field="frm-image"
+                                           value="{:lang('Upload file')}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-around">
+                            <div class="col-sm-8">
+                                <button type="button" class="btn btn-primary btn-sub-import">{:lang('Submit')}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="exportlist" role="tabpanel">
+                    <table id="table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{block:script}
+<script>
+    require(['admin','table','jquery-fileupload', 'form'], function (undefined, cmsTable, fileupload, Form) {
+        $(function () {
+            var indexmsg;
+            cmsTable.init({
+                url: "{:url('/excel.index/index',['type'=>'excel_list'])}",
+                showToggle: false,
+                search: false,
+                pagination: false,
+                escape: false,
+                sortName:false,
+                //toolbar:'#toolbar',
+                //contentLangSw: true,
+                columns: [{
+                    field: 'title',
+                    title: '{:lang("Document Name")}',
+                    align: 'left',
+                },{
+                    field: 'category_name',
+                    title: '{:lang("Category Name")}',
+                    align: 'left',
+                },{
+                    field: 'admin_name',
+                    title: '{:lang("Admin Name")}',
+                    align: 'left',
+                },{
+                    field: 'create_time',
+                    title: '{:lang("Create time")}',
+                    align: 'left',
+                },{
+                    field: 'operate',
+                    title: '{:lang("Operate")}',
+                    align: 'left',
+                    delTips: '{:lang("Are you sure to move to the recycle bin? Will include sub-sections and document data.")}',
+                    formatter: function (value, row, index) {
+                        let html = '';
+                        html += '<a href="download/id/'+row.id+'" class="btn btn-primary btn-xs text-white">{:lang("Download")}</a>&nbsp';
+                        html += '<button type="button" class="btn btn-danger btn-xs text-white btn-del" data-id="'+row['id']+'">{:lang("Delete")}</button>&nbsp';
+                        return html;
+                    },
+                    events: cmsTable.events.operate
+                }]
+            });
+            //导出数据，选择栏目
+            $('.form-export select[name="row[category_id]"]').on('change',function (e) {
+                var category_id = $(this).val();
+                if (category_id == "") {
+                    $('.alltablefield').hide();
+                    $('.tablefield').html("");
+                    return false;
+                }
+                $.get("{:url('/excel.index/index')}",{category_id:category_id,type:'category'},function (data) {
+                    var index = layer.msg("{:lang('Extract field...')}",{icon: 1,time: 1800000})
+                    $('.form-export input[name="row[model_id]"]').val(data['model_id']);
+                    var tablefieldhtml = ``;
+                    $.each(data['rows'],function (index,value) {
+                        tablefieldhtml += `<tr>
+                                                <td scope="row"><input type="checkbox" name="row[field][]" value="`+value['Field']+`"></td>
+                                                <td>`+value['Field']+`</td>
+                                                <td>`+value['Comment']+`</td>
+                                            </tr>`;
+                    })
+                    $('.tablefield').html(tablefieldhtml);
+                    $('.alltablefield').show();
+                    setTimeout(function(){
+                        layer.close(index);
+                    },500);
+                    $('.all-field').on('click',function(){
+                        if($(this).is(':checked')){
+                            $('input[name="row[field][]"]').prop('checked',true)
+                        }else{
+                            $('input[name="row[field][]"]').prop('checked',false)
+                        }
+                    })
+                })
+            })
+            //导出数据
+            $('.btn-sub-export').on('click',function (e) {
+                if ($('.form-export select[name="row[category_id]"]').val() == "") {
+                    layer.msg("{:lang('Please select category')}",{icon: 2,time: 3000})
+                    return false;
+                }
+                if ($.trim($('.form-export input[name="row[name]"]').val()) == "") {
+                    layer.msg("{:lang('Please enter a document name')}",{icon: 2,time: 3000})
+                    return false;
+                }
+                var formdata = $(".form-export").serializeArray();
+                $.post("{:url('/excel.index/export')}",formdata,function (data) {
+                    if (data.code == 0) {
+                        layer.msg(data.msg,{icon: 2,time: 3000})
+                        return false;
+                    } else {
+                        layer.alert(data.msg,function(){
+                            window.location.reload();
+                        })
+                    }
+                })
+                return false;
+            })
+            //导出列表删除按钮
+            $(document).on('click','.btn-del',function (e) {
+                var self = $(this);
+                if (self.hasClass('disabled')) {
+                    return false;
+                }
+                layer.confirm("{:lang('Confirm to delete?')}", {
+                    btn: [lang('Confirm'),lang('Cancel')] //按钮
+                }, function(){
+                    self.addClass('disabled');
+                    self.html("{:lang('Deleting...')}");
+                    $.get("{:url('/excel.index/delexcel')}",{id:self.data('id')}, function (data) {
+                        if (data.code) {
+                            var icon = 1;
+                        }else{
+                            var icon = 5;
+                        }
+                        layer.msg(data['msg'],{time:3000, icon:icon},function (e) {
+                            if (data.code) {
+                                $("#table").bootstrapTable('refresh');
+                            } else {
+                                self.removeClass('disabled');
+                                self.html("{:lang('Delete failed')}");
+                            }
+                        })
+                    }, "json");
+                })
+                return false;
+            });
+            //导入数据，选择栏目
+            $('.form-import .btn-import-dome').on('click',function (e) {
+                var category_id = $('.form-import select[name="row[category_id]"]').val();
+                if (category_id == "") {
+                    layer.msg("{:lang('Please select category')}",{icon: 2,time: 2000});
+                    return false;
+                }
+                window.open("{:url('/excel.index/exportDome')}?category_id="+category_id);
+            })
+
+            //开始导入文档
+            $('.btn-sub-import').on('click',function (e) {
+                var importbtnthis = $(this);
+                if (importbtnthis.hasClass('disabled')) {
+                    return false;
+                }
+                importbtnthis.addClass('disabled');
+                var category_id = $('.form-import select[name="row[category_id]"]').val();
+                if (category_id == "") {
+                    layer.msg("{:lang('Please select category')}",{icon: 2,time: 3000})
+                    return false;
+                }
+                indexmsg = layer.msg("{:lang('Importing data...')}",{icon: 1,time: 1800000});
+                var formdata = $(".form-import").serializeArray();
+                $.post("{:url('/excel.index/import')}",formdata,function (data) {
+                    setTimeout(function() {
+                        layer.msg(data['msg'], {time: 3000},function () {
+                            if (data['code'] == 1) {
+                                window.location.reload();
+                            } else {
+                                importbtnthis.removeClass('disabled');
+                            }
+                        })
+                    },500);
+                })
+                return false;
+            })
+
+            Form.api.init({frmOperate:".form-import"});
+        });
+    });
+</script>
+{/block:script}

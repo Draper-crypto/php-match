@@ -1,0 +1,38 @@
+<?php
+declare (strict_types=1);
+
+namespace addons\{%$name%};
+use think\Addons;
+
+class {%$bname%} extends Addons
+{
+    // 插件安装时的处理(必须存在该方法)
+    public function install()
+    {
+        return true;
+    }
+
+    // 插件卸载时的处理(必须存在该方法)
+    public function uninstall()
+    {
+        return true;
+    }
+
+    // 插件启用时触发(可选)
+    public function enable()
+    {
+        return true;
+    }
+
+    // 插件禁用时的处理(可选)
+    public function disable()
+    {
+        return true;
+    }
+
+    // 插件升级时的处理(可选)
+    public function upgrade()
+    {
+        return true;
+    }
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html style="font-size: 15px">
+<head>
+    <title>{$site.title} - {:lang('Member center')} - {:lang('login')}</title>
+
+    {include file="user/common/head"}
+</head>
+<body>
+{include file="user/common/menu"}
+
+<div class="login-page">
+    <div class="login-box">
+        <div class="card">
+            <div class="card-body login-card-body">
+                <form action="" method="post" class="frm-operate">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="{:lang('Email')}/{:lang('Mobile')}/{:lang('Username')}" name="row[username]">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="form-control" placeholder="{:lang('Password')}" name="row[password]">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    {if $config['login_captcha']==1}
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="{:lang('Verification Code')}" name="row[code]">
+                        <div class="input-group-append">
+                            <a href="#" class="refresh"><img src="{:url('/user.user/verify')}" style="width: 146px" /></a>
+                        </div>
+                    </div>
+                    {/if}
+                    <div class="row mb-3">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember" name="auto_signin" value="1">
+                                <label for="remember" class="text-secondary text-sm">
+                                    {:lang('Keep the session')}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-4 text-right">
+                            <a href="{:url('/user.user/resetpwd')}" class="text-secondary text-sm">{:lang('Forget Password?')}</a>
+                        </div>
+                    </div>
+
+                    <div class="social-auth-links text-center mb-4">
+                        <input type="submit" class="btn btn-block btn-primary btn-submit" value="{:lang('Sign in')}" />
+                    </div>
+                </form>
+
+                <p class="text-center"><a href="{:url('/user.user/register')}">{:lang('Create an account')}</a></p>
+
+                <div class="social-auth-links text-center mb-3">
+                    <p class="text-sm other-tips" style="color: #b2b8bd;display: none">- {:lang('Other')} -</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="user/common/footer"}
+<script>
+    require(['jquery','bootstrap','layer','Form'], function ($,undefined,layer,Form) {
+        $('.refresh').click(function (e) {
+            e.preventDefault();
+            $(this).find('img').attr('src',"{:url('/user.user/verify')}?r="+Math.random());
+        });
+        Form.api.init({success:function (data, response) {
+                Layer.msg(response.msg,{time:1000, icon:1},function (e) {
+                    window.location.href = data.url;
+                });
+                return false;
+            },error: function (res) {
+                if (res.code==-1001) {
+                    $('.refresh').click();
+                }
+            }});
+    })
+</script>
+
+</body>
+</html>

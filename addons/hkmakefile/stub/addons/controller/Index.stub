@@ -1,0 +1,29 @@
+<?php
+
+namespace addons\{%$name%}\controller;
+
+use think\addons\Controller;
+
+class Index extends Controller
+{
+
+    /**
+      * 浏览器访问地址格式：http://xxx.com/addons/插件名称/控制器名/操作方法
+      * 如上demo插件，那么首页控制器访问如下，没写控制器那么访问的是Index控制器，操作方法默认是index
+      * http://xxx.com/addons/demo/index/index
+      * 首页默认是Index，操作方法index，那么可以省略，如下即可直接访问到
+      * http://xxx.com/addons/demo/
+      */
+
+    public function index()
+    {
+        return '首页';
+    }
+
+    //测试视图
+    public function test()
+    {
+        return $this->fetch();
+    }
+
+}

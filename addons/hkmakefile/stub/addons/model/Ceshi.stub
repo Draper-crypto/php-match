@@ -1,0 +1,10 @@
+<?php
+
+namespace addons\{%$name%}\model;
+
+use think\Model;
+
+class Ceshi extends Model
+{
+    //插件的模型跟thinkphp的使用也是一样的，更多了解可参考：https://www.kancloud.cn/manual/thinkphp6_0/1037580
+}

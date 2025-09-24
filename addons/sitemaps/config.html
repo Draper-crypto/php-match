@@ -1,0 +1,164 @@
+<div class="col-12 col-sm-12" id="sitemaps">
+    <div class="card card-tabs">
+        <div class="card-header">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" data-page="group" href="{:url('routine.Seo/index')}" role="tab" aria-selected="false">SEO配置</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="group-tab" data-toggle="pill" data-page="group" href="#pane-group-tab" role="tab" aria-selected="false">Sitemap</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body config-row">
+            <div class="tab-content">
+                <div class="tab-pane fade active show" role="tabpanel">
+                    <form class="frm-operate">
+                        <div class="card card-tabs">
+                            <div class="card-body">
+                                <div class="tab-content" id="custom-tabs-three-tabContent">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-12 row-form-label">更新频率</label>
+                                        <div class="col-sm-8 col-12">
+                                            <div style="display: flex;align-items: center">
+                                                <div style="margin-right: 4px">首页</div>
+                                                <select class="form-control" name="row[changefreq_home]" style="width: 100px;margin-right: 8px">
+                                                    {volist name="$sdata.changefreq_home.options" id="vo"}
+                                                    <option value="{$key}" {if $key == $sdata.changefreq_home.value}selected{/if}>{$vo}</option>
+                                                    {/volist}
+                                                </select>
+                                                <div style="margin-right: 4px">栏目</div>
+                                                <select class="form-control" name="row[changefreq_category]" style="width: 100px;margin-right: 8px">
+                                                    {volist name="$sdata.changefreq_category.options" id="vo"}
+                                                    <option value="{$key}" {if $key == $sdata.changefreq_category.value}selected{/if}>{$vo}</option>
+                                                    {/volist}
+                                                </select>
+                                                <div style="margin-right: 4px">内容</div>
+                                                <select class="form-control" name="row[changefreq_content]" style="width: 100px;margin-right: 8px">
+                                                    {volist name="$sdata.changefreq_content.options" id="vo"}
+                                                    <option value="{$key}" {if $key == $sdata.changefreq_content.value}selected{/if}>{$vo}</option>
+                                                    {/volist}
+                                                </select>
+                                                <div style="margin-right: 4px">标签</div>
+                                                <select class="form-control" name="row[changefreq_tags]" style="width: 100px">
+                                                    {volist name="$sdata.changefreq_tags.options" id="vo"}
+                                                    <option value="{$key}" {if $key == $sdata.changefreq_tags.value}selected{/if}>{$vo}</option>
+                                                    {/volist}
+                                                </select>
+                                            </div>
+                                            <div class="form-tips text-muted" style="margin-top: 4px">影响xml文件中的changefreq标签值</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-12 row-form-label">优先级别</label>
+                                        <div class="col-sm-8 col-12">
+                                            <div style="display: flex;align-items: center">
+                                                <div style="margin-right: 4px">首页</div>
+                                                <select class="form-control" name="row[priority_home]" style="width: 100px;margin-right: 8px">
+                                                    {volist name="$sdata.priority_home.options" id="vo"}
+                                                    <option value="{$key}" {if $key == $sdata.priority_home.value}selected{/if}>{$vo}</option>
+                                                    {/volist}
+                                                </select>
+                                                <div style="margin-right: 4px">栏目</div>
+                                                <select class="form-control" name="row[priority_category]" style="width: 100px;margin-right: 8px">
+                                                    {volist name="$sdata.priority_category.options" id="vo"}
+                                                    <option value="{$key}" {if $key == $sdata.priority_category.value}selected{/if}>{$vo}</option>
+                                                    {/volist}
+                                                </select>
+                                                <div style="margin-right: 4px">内容</div>
+                                                <select class="form-control" name="row[priority_content]" style="width: 100px;margin-right: 8px">
+                                                    {volist name="$sdata.priority_content.options" id="vo"}
+                                                    <option value="{$key}" {if $key == $sdata.priority_content.value}selected{/if}>{$vo}</option>
+                                                    {/volist}
+                                                </select>
+                                                <div style="margin-right: 4px">标签</div>
+                                                <select class="form-control" name="row[priority_tags]" style="width: 100px">
+                                                    {volist name="$sdata.priority_tags.options" id="vo"}
+                                                    <option value="{$key}" {if $key == $sdata.priority_tags.value}selected{/if}>{$vo}</option>
+                                                    {/volist}
+                                                </select>
+                                            </div>
+                                            <div class="text-muted" style="margin-top: 4px">影响xml文件中的priority标签值</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-12 row-form-label">分页大小</label>
+                                        <div class="col-sm-8 col-12">
+                                            <div style="display: flex;align-items: center">
+                                                <div style="margin-right: 4px">栏目列表</div>
+                                                <input type="number" value="{$sdata.page_category.value}" name="row[page_category]" class="form-control" style="width: 100px;margin-right: 8px">
+                                                <div style="margin-right: 4px">列表页</div>
+                                                <input type="number" value="{$sdata.page_content.value}" name="row[page_content]" class="form-control" style="width: 100px;margin-right: 8px">
+                                                <div style="margin-right: 4px">标签页</div>
+                                                <input type="number" value="{$sdata.page_tags.value}" name="row[page_tags]" class="form-control" style="width: 100px;margin-right: 8px">
+                                                <div class="form-tips"><span class="form-tips-span" data-tips="最大数量不能超过5000条"><i class="far fa-question-circle"></i></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-12 row-form-label"></label>
+                                        <div class="col-sm-6 col-12">
+                                            <div class="alert alert-default-dark alert-dismissible">
+                                                站点地图首页：{:request()->domain(false)}/sitemaps/index.xml <br>
+                                                注意：百度不支持索引文件，您需要手动将索引文件里面的URL提交到百度。
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-12 row-form-label">XML生成位置</label>
+                                        <div class="col-sm-8 col-12">
+                                            <div style="display: flex;align-items: center">
+                                                <input type="text" value="{$sdata.filepath.value}" name="row[filepath]" class="form-control" style="width: 300px;margin-right: 4px">
+                                                <button type="button" class="btn btn-default btn-generate">{:__('点我生成')}</button>
+                                            </div>
+                                            <div class="text-muted" style="margin-top: 4px">生成位置: public/<span class="J-filepath"></span>/index.xml</div>
+                                            <div class="text-muted" style="margin-top: 4px">访问地址: {:request()->domain(false)}/<span class="J-filepath"></span>/index.xml</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row justify-content-around">
+                                    <div class="col-sm-8">
+                                        <button type="submit" class="btn btn-primary btn-submit">{:__('Submit')}</button>
+                                        <button type="reset" class="btn btn-default">{:__('Reset')}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{block:script}
+<script>
+    require(['admin','form'], function (admin, Form) {
+        Form.api.init({success:function (data,response) {
+                layer.msg(response.msg, {time:2000, icon:1}, function () {
+                    window.location.reload();
+                })
+                return false;
+            }});
+
+        $('input[name="row[filepath]"]').change(function () {
+            $('.J-filepath').html($(this).val());
+        });
+        $('input[name="row[filepath]"]').trigger('change');
+
+        $('.btn-generate').click(function () {
+            var url = "{:url('routine.Sitemaps/generateXml')}";
+            $.ajax({
+                url: url,
+                type: 'post',
+                dataType: 'json',
+                success: function (ret) {
+                    layer.msg(ret.msg);
+                }
+            })
+        })
+    });
+</script>
+{/block:script}
